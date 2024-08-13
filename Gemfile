@@ -10,6 +10,8 @@ gem "importmap-rails"
 
 gem "jbuilder"
 
+gem 'nokogiri'
+
 gem "pg", "~> 1.1"
 
 gem "puma", ">= 5.0"
