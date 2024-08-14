@@ -53,6 +53,9 @@ RSpec.configure do |config|
   #     RSpec.describe UsersController, type: :controller do
   #       # ...
   #     end
+  Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+
+
   #
   # The different available types are documented in the features, such as in
   # https://rspec.info/features/6-0/rspec-rails
