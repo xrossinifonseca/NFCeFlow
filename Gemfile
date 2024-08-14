@@ -20,7 +20,8 @@ gem "sprockets-rails"
 
 gem "stimulus-rails"
 
-gem 'sidekiq', '~> 7.3'
+gem 'sidekiq', '~> 6.2'
+
 
 gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 
