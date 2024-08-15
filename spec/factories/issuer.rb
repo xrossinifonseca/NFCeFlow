@@ -11,5 +11,6 @@ FactoryBot.define do
     pais {'Brasil'}
     uf {'SP'}
     cep {'12345678'}
+    telefone {"123456790"}
 end
 end
