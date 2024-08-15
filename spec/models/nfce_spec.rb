@@ -3,10 +3,9 @@ require 'rails_helper'
 RSpec.describe Nfce, type: :model do
 
   it 'is a valid nfce' do
-
-    nfce = build(:nfce)
+    nfce = build(:nfce,valor_total:1000)
     expect(nfce).to be_valid
-
+    expect(nfce.valor_total).to eq(1000)
   end
 
   describe "validations" do
@@ -69,12 +68,4 @@ RSpec.describe Nfce, type: :model do
     end
 
   end
-
-
-
-
-
-
-
-
 end
