@@ -1,5 +1,5 @@
 class Recipient < ApplicationRecord
-  has_many :nfce, dependent: :destroy
+  has_many :nfces, dependent: :destroy
 
   validates :cnpj, presence: true, uniqueness: true
 
