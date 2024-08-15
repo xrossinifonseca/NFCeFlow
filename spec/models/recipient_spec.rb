@@ -7,6 +7,11 @@ RSpec.describe Recipient, type: :model do
     expect(recipient).to be_valid
   end
 
+  it "is  valid if telefone is not present" do
+    recipient = build(:recipient,telefone:nil)
+    expect(recipient).to be_valid
+  end
+
 
   describe "validations" do
 
@@ -40,6 +45,8 @@ RSpec.describe Recipient, type: :model do
       expect(recipient_2).not_to be_valid
       expect(recipient_2.errors[:cnpj]).to include("can't be blank")
     end
+
+
 
     end
 
