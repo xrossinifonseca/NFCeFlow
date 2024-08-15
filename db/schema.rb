@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_14_141331) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_15_004416) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,16 +46,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_14_141331) do
   end
 
   create_table "nfce_products", force: :cascade do |t|
-    t.bigint "nfce_id", null: false
-    t.bigint "product_id", null: false
-    t.decimal "quantidade", null: false
-    t.decimal "valor_unitario", null: false
+    t.integer "nfce_id", null: false
+    t.integer "product_id", null: false
+    t.decimal "valor_unitario", precision: 10, scale: 2, null: false
     t.string "unidade_comercializada", null: false
-    t.decimal "quantidade_comercializada", null: false
-    t.decimal "valor_icms"
-    t.decimal "valor_ipi"
+    t.decimal "quantidade_comercializada", precision: 10, scale: 2, null: false
+    t.decimal "valor_icms", precision: 10, scale: 2
+    t.decimal "valor_ipi", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "valor_total", precision: 10, scale: 2
     t.index ["nfce_id"], name: "index_nfce_products_on_nfce_id"
     t.index ["product_id"], name: "index_nfce_products_on_product_id"
   end
@@ -64,15 +64,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_14_141331) do
     t.string "serie", null: false
     t.string "numero_nota", null: false
     t.date "data_emissao", null: false
-    t.bigint "customer_id", null: false
-    t.bigint "issuer_id", null: false
-    t.bigint "recipient_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customer_id"], name: "index_nfces_on_customer_id"
-    t.index ["issuer_id"], name: "index_nfces_on_issuer_id"
+    t.decimal "valor_total_desconto", precision: 10, scale: 2
+    t.decimal "valor_total_produtos", precision: 10, scale: 2
+    t.decimal "valor_total", precision: 10, scale: 2
+    t.integer "customer_id"
+    t.integer "issuer_id"
+    t.integer "recipient_id"
     t.index ["numero_nota"], name: "index_nfces_on_numero_nota", unique: true
-    t.index ["recipient_id"], name: "index_nfces_on_recipient_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -102,10 +102,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_14_141331) do
 
   create_table "taxes", force: :cascade do |t|
     t.bigint "nfce_id", null: false
-    t.decimal "valor_pis"
-    t.decimal "valor_cofins"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "valor_total_pis", precision: 10, scale: 2
+    t.decimal "valor_total_cofins", precision: 10, scale: 2
+    t.decimal "valor_icms", precision: 10, scale: 2
+    t.decimal "valor_total_ipi", precision: 10, scale: 2
+    t.decimal "valor_tributo", precision: 10, scale: 2
     t.index ["nfce_id"], name: "index_taxes_on_nfce_id"
   end
 
