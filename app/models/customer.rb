@@ -1,5 +1,6 @@
 class Customer < ApplicationRecord
   has_many :nfces, dependent: :destroy
+  has_many :uploads
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
