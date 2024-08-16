@@ -7,7 +7,7 @@ class Nfce < ApplicationRecord
   has_many :products, through: :nfce_products
 
   validates :data_emissao, presence: true
-  validates :numero_nota, presence: true, uniqueness: true
+  validates :numero_nota, presence: true, uniqueness: {scope: [:customer_id],message:"NFC-e is already registered"}
   validates :serie, presence: true
 
 
