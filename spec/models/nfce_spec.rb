@@ -42,10 +42,10 @@ RSpec.describe Nfce, type: :model do
     end
 
 
-    it 'is not valid if nfce has already been taken' do
+    it 'is not valid if nfce has already been taken by the same customer' do
       issuer = build(:issuer)
       recipient = build(:recipient)
-      customer = build(:customer)
+      customer = create(:customer)
 
       nfce = Nfce.create!(
         serie:'test',
@@ -59,9 +59,39 @@ RSpec.describe Nfce, type: :model do
         issuer:issuer,
       )
 
-      nfce_2 = build(:nfce,numero_nota:"001")
+      nfce_2 = build(:nfce,numero_nota:"001",customer:customer)
+
+
       expect(nfce_2).not_to be_valid
-      expect(nfce_2.errors[:numero_nota]).to include("has already been taken")
+      expect(nfce_2.errors[:numero_nota]).to include("NFC-e is already registered")
+    end
+
+    it "is a valid nfce is the nfce is registered by other user " do
+
+      issuer = build(:issuer)
+      recipient = build(:recipient)
+      customer = create(:customer)
+
+      customer_2 = Customer.create(name:"test",email:"customer2@gmail.com",password:"123test")
+
+
+      nfce = Nfce.create!(
+        serie:'test',
+        numero_nota:'001',
+        data_emissao: '2024-08-14',
+        valor_total_desconto: 0.0,
+        valor_total_produtos: 2500,
+        valor_total: 2700,
+        customer: customer,
+        recipient: recipient,
+        issuer:issuer,
+      )
+
+      nfce_2 = build(:nfce,numero_nota:"001",customer:customer_2)
+
+      expect(nfce_2).to be_valid
+      expect(nfce.numero_nota).to eq(nfce_2.numero_nota)
+
     end
 
   end
