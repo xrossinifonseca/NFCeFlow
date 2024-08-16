@@ -10,6 +10,8 @@ gem "importmap-rails"
 
 gem "jbuilder"
 
+gem 'mimemagic'
+
 gem 'nokogiri'
 
 gem "pg", "~> 1.1"
@@ -24,6 +26,7 @@ gem 'sidekiq', '~> 6.2'
 
 
 gem "rails", "~> 7.1.3", ">= 7.1.3.4"
+gem 'rubyzip'
 
 gem "turbo-rails"
 
