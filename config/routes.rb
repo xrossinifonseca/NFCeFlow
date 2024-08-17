@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   }
 
   resources :uploads, only: [:index,:create,:new]
-
+  resources :recipients, only: [:index]
   resources :nfces, only: [:show, :index] do
     collection do
       get 'export_report'
