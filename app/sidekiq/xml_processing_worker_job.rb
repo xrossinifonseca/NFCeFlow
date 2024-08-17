@@ -3,6 +3,7 @@ class XmlProcessingWorkerJob
 
   def perform(file_path,customer_id,upload_id)
 
+    Rails.logger.info("Processing file: #{file_path}")
   upload = Upload.find(upload_id)
 
   begin
