@@ -1,10 +1,26 @@
 Rails.application.routes.draw do
-  devise_for :customers
-  get 'home/index'
+  # get 'errors/not_found'
 
-  # get "up" => "rails/health#show", as: :rails_health_check
+  devise_for :customers, path: '', path_names: {
+    sign_in: 'login',
+    sign_out: 'logout',
+    password: 'secret',
+    confirmation: 'verification',
+    sign_up: 'signup'
+  }
 
-  root to: "home#index"
+  resources :uploads, only: [:index,:create,:new]
 
-  # root "posts#index"
+  resources :nfces, only: [:show, :index] do
+    collection do
+      get 'export_report'
+    end
+  end
+
+  get '/nfces', to: redirect('/')
+
+  get 'nfces/index'
+  root to: "nfces#index"
+
+  match "*path", to: "errors#not_found", via: :all
 end
