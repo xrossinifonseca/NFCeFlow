@@ -79,6 +79,7 @@ test:
 #
 production:
   <<: *default
-  database: trackmaino_production
-  username: trackmaino
-  password: <%= ENV["TRACKMAINO_DATABASE_PASSWORD"] %>
+  database: <%= ENV['PGDATABASE'] %>
+  username: <%= ENV['PGUSER'] %>
+  password: <%= ENV['PGPASSWORD'] %>
+  host: <%= ENV['PGHOST'] %>
