@@ -18,10 +18,20 @@ def create
 
   file_path = Rails.root.join('tmp', 'uploads', file.original_filename)
 
+  Rails.logger.info("Saving file to: #{file_path}")
+
+
   File.open(file_path, 'wb') do |f|
     f.write(file.read)
   end
 
+  if File.exist?(file_path)
+    Rails.logger.info("File successfully saved: #{file_path}")
+  else
+    Rails.logger.error("File could not be saved: #{file_path}")
+    flash[:error] = "File could not be saved"
+    return redirect_to new_upload_path
+  end
 
   mime_type = MimeMagic.by_path(file_path)
 
