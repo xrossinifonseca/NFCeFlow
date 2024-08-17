@@ -16,14 +16,19 @@ services:
     runtime: ruby
     region: Oregon
     buildCommand: bundle install
-    startCommand: bundle exec sidekiq
+    startCommand: bundle exec sidekiq -C config/sidekiq.yml
     envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: trackmaino
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
       - key: REDIS_URL
         fromService:
           type: redis
           name: trackmaino-redis
           property: connectionString
-      - key: RAILS_MASTER_KEY
         sync: false
 
   - type: web
