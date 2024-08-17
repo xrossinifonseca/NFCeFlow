@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_15_180428) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_16_234725) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_15_180428) do
     t.integer "customer_id"
     t.integer "issuer_id"
     t.integer "recipient_id"
-    t.index ["numero_nota"], name: "index_nfces_on_numero_nota", unique: true
+    t.index ["numero_nota"], name: "index_nfces_on_numero_nota"
   end
 
   create_table "products", force: :cascade do |t|
