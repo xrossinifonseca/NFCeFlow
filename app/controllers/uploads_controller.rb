@@ -18,40 +18,36 @@ def create
 
   file_path = Rails.root.join('tmp', 'uploads', file.original_filename)
 
-  Rails.logger.info("Saving file to: #{file_path}")
-
-
   File.open(file_path, 'wb') do |f|
     f.write(file.read)
   end
 
-  if File.exist?(file_path)
-    Rails.logger.info("File successfully saved: #{file_path}")
-  else
-    Rails.logger.error("File could not be saved: #{file_path}")
-    flash[:error] = "File could not be saved"
-    return redirect_to new_upload_path
-  end
-
   mime_type = MimeMagic.by_path(file_path)
 
+   if File.exist?(file_path)
+
     if mime_type.subtype == "zip"
+      ZipFileProcessingService.process(file_path,current_customer.id)
+      flash[:success] = "your zip file is being processed"
 
-    ZipFileProcessingService.process(file_path,current_customer.id)
-
-
-    flash[:success] = "your zip file is being processed"
-    redirect_to uploads_path
-
-    elsif mime_type.subtype == "xml"
-
-      upload = Upload.create!(file_name:file.original_filename, status:"processing", customer_id:current_customer.id)
-      XmlProcessingWorkerJob.perform_async(file_path.to_s,current_customer.id,upload.id)
-      flash[:success] = "your xml file is being processed"
       redirect_to uploads_path
 
+      elsif mime_type.subtype == "xml"
+
+        upload = Upload.create!(file_name:file.original_filename, status:"processing", customer_id:current_customer.id)
+
+        XmlProcessingWorkerJob.perform_in(60,file_path.to_s,current_customer.id,upload.id)
+
+        flash[:success] = "your xml file is being processed"
+
+        redirect_to uploads_path
+
+      else
+        flash[:error] = "The file must be in XML or ZIP format. Please upload a file with one of the supported extensions."
+        return redirect_to new_upload_path
+      end
     else
-      flash[:error] = "The file must be in XML or ZIP format. Please upload a file with one of the supported extensions."
+      flash[:error] = "Failed to save the file. Please try again."
       return redirect_to new_upload_path
     end
 end
