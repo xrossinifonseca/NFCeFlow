@@ -15,7 +15,7 @@ class XmlProcessingService
 
 
   def parse_xml(file)
-    xml = Nokogiri::XML(File.read(@file))
+    xml = Nokogiri::XML(file)
     raise "Invalid XML file" unless xml.errors.empty?
     xml
   end
