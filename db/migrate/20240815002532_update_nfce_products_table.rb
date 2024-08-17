@@ -14,5 +14,6 @@ class UpdateNfceProductsTable < ActiveRecord::Migration[7.1]
       t.change :product_id, :integer
       t.change :nfce_id, :integer
 
+    end
   end
 end
