@@ -20,6 +20,10 @@
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
 !/tmp/pids/
+!/tmp/uploads
+/tmp/uploads/*
+!/tmp/uploads/.keep
+
 !/tmp/pids/.keep
 
 # Ignore storage (uploaded files in development and any SQLite databases).
