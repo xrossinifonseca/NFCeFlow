@@ -1,5 +1,6 @@
 class Customer < ApplicationRecord
   has_many :nfces, dependent: :destroy
+  has_many :taxes, through: :nfces
   has_many :uploads
 
   devise :database_authenticatable, :registerable,
