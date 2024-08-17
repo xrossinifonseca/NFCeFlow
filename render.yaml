@@ -2,13 +2,13 @@ databases:
   - name: trackmaino
     databaseName: mysite
     user: maino_user
-    plan: free
+    plan: Starter
 
 services:
   - type: web
-    name: mysite
+    name: trackmaino
     runtime: ruby
-    plan: free
+    plan: fre
     buildCommand: "./bin/render-build.sh"
     # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
     startCommand: "bundle exec rails server"
