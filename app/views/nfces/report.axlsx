@@ -1,0 +1,23 @@
+
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Nfce") do |sheet|
+  sheet.add_row [
+          'Data Inicial', 
+          'Data Final',
+          "quantidades notas", 
+          'Total',
+          'Total tributo', 
+          'Total IPI', 
+          'Total icms',
+        ]
+    sheet.add_row [
+            @start_date, 
+            @end_date, 
+            @nfces_by_period.count,
+            @total, 
+            @total_value_tributo, 
+            @total_value_api, 
+            @total_value_icms, 
+          ]
+end

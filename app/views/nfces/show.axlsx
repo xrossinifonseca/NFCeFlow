@@ -1,0 +1,68 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Nfce") do |sheet|
+  sheet.add_row [
+    'Número da Nota', 
+    'Série', 
+    'Data de Emissão', 
+    'Valor Total Desconto', 
+    'Valor Total Produtos', 
+    'Valor Total',
+    'Emissor Nome',
+    'Emissor CNPJ',
+    'Emissor Nome Fantasia',
+    'Emissor Endereço',
+    'Emissor Telefone',
+    'Destinatário Nome',
+    'Destinatário CNPJ',
+    'Destinatário Endereço',
+    'Produto Nome',
+    'Produto Valor Unitário',
+    'Produto Unidade Comercializada',
+    'Produto Quantidade Comercializada',
+    'Produto Valor ICMS',
+    'Produto Valor Total',
+    'Imposto PIS',
+    'Imposto COFINS',
+    'Imposto ICMS',
+    'Imposto Tributo'
+  ]
+
+  sheet.add_row [
+    @nfce.numero_nota, 
+    @nfce.serie, 
+    @nfce.data_emissao, 
+    @nfce.valor_total_desconto, 
+    @nfce.valor_total_produtos, 
+    @nfce.valor_total,
+    @nfce.issuer.nome,
+    @nfce.issuer.cnpj,
+    @nfce.issuer.nome_fantasia,
+    [@nfce.issuer.logradouro, @nfce.issuer.numero, @nfce.issuer.bairro, @nfce.issuer.municipio, @nfce.issuer.uf].compact.join(', '),
+    @nfce.issuer.telefone,
+    @nfce.recipient.nome,
+    @nfce.recipient.cnpj,
+    [@nfce.recipient.logradouro, @nfce.recipient.numero, @nfce.recipient.bairro, @nfce.recipient.municipio, @nfce.recipient.uf].compact.join(', '),
+    '', # Placeholder para os produtos, se for necessário mais de uma linha
+    '', # Placeholder para os produtos, se for necessário mais de uma linha
+    '', # Placeholder para os produtos, se for necessário mais de uma linha
+    '', # Placeholder para os produtos, se for necessário mais de uma linha
+    '', # Placeholder para os produtos, se for necessário mais de uma linha
+    '', # Placeholder para os produtos, se for necessário mais de uma linha
+    @nfce.tax.valor_total_pis,
+    @nfce.tax.valor_total_cofins,
+    @nfce.tax.valor_icms,
+    @nfce.tax.valor_tributo
+  ]
+
+  @nfce.nfce_products.each do |product|
+    sheet.add_row [
+      '', '', '', '', '', '', '', '', '', '', '', '', '', '', product.product.nome, 
+      product.valor_unitario, 
+      product.unidade_comercializada, 
+      product.quantidade_comercializada, 
+      product.valor_icms, 
+      product.valor_total
+    ]
+  end
+end

@@ -1,0 +1,22 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Nfce") do |sheet|
+  sheet.add_row [
+          'Número da Nota', 
+          'Série', 
+          'Data de Emissão', 
+          'Valor Total Desconto', 
+          'Valor Total Produtos', 
+          'Valor Total', 
+        ]
+  @nfces_xlsx.each do |nfce|
+    sheet.add_row [
+            nfce.numero_nota, 
+            nfce.serie, 
+            nfce.data_emissao, 
+            nfce.valor_total_desconto, 
+            nfce.valor_total_produtos, 
+            nfce.valor_total, 
+          ]
+  end
+end
