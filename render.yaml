@@ -5,13 +5,34 @@ databases:
     plan: Starter
 
 services:
+  - type: redis
+    name: trackmaino-redis
+    region: Oregon
+    maxmemoryPolicy: allkeys-lru
+    ipAllowList: [] # only allow internal connections
+
+  - type: worker
+    name: trackmaino
+    runtime: ruby
+    region: Oregon
+    buildCommand: bundle install
+    startCommand: bundle exec sidekiq
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: trackmaino-redis
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+
   - type: web
     name: trackmaino
     runtime: ruby
     plan: free
-    buildCommand: "./bin/render-build.sh"
+    buildCommand: ./bin/render-build.sh
     # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
-    startCommand: "bundle exec rails server"
+    startCommand: bundle exec rails server
     envVars:
       - key: DATABASE_URL
         fromDatabase:
