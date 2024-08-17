@@ -1,0 +1,54 @@
+ <div class="mt-10">
+
+
+  <% if flash[:success]%> 
+  <div class="p-2 text-white bg-green-600 text-lg mb-10 max-w-xl">
+    <%= flash[:success] %>
+  </div>
+  <%end%>
+
+  <div class="mb-5 flex justify-center">
+  <%= link_to "Proccess File +", new_upload_path, class: "bg-green-600 p-2 text-white rounded-md shadow-md text-xl ease-in-out duration-500  hover:scale-105" %>
+  </div>
+
+ <div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                  File name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Status
+                </th>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                    Message
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr class="border-b border-gray-200 dark:border-gray-700">
+         <% @uploads.each do |upload| %> 
+        <tr> 
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+            <%= upload.file_name %> 
+          </th>
+            <td class="px-6 py-4">
+              <%= upload.status %> 
+          </td>
+          <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+             <%= upload.error_message if upload.status == 'failed' %> 
+          </td>
+          <td class="px-6 py-4">
+            <%= upload.created_at.strftime("%d/%m/%Y") %> 
+          </td>
+          </tr> 
+        <% end %> 
+        </tbody>
+    </table>
+</div>
+</div>
+

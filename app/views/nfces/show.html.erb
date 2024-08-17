@@ -1,0 +1,75 @@
+
+<div class="text-white mt-10">
+  <% if @nfce %>
+
+    
+    
+  <div class="flex flex-col items-center gap-2">
+
+   <h1 class="text-blue-500 text-center font-bold text-2xl">
+    #<%=@nfce.numero_nota%></li>
+   </h1>
+    <div class="text-white bg-green-600  text-xl w-fit p-2">
+    <%= link_to 'Export', nfce_path(@nfce, format: :xlsx), target: :_blank, class: "underline" %>
+    </div>
+  </div>
+
+   
+
+
+
+
+
+
+<ul class="space-y-2 text-white py-2">
+<li class="text-xl">Data de emissão: <span class="text-blue-500"><%=@nfce.data_emissao%></span> </li>
+<li class="text-xl">Valor total produtos:<span class="text-blue-500"><%=@nfce.valor_total_produtos%></span> </li>
+<li class="text-xl">Valor total descontos:<span class="text-blue-500"> <%=@nfce.valor_total_desconto%></span> </li>
+<li class="text-xl">Valor total:<span class="text-blue-500"> <%=@nfce.valor_total%></span> </li>
+</ul>
+
+<h2 class="text-white text-2xl font-bold mt-5 uppercase">Emissor</h2>
+  <div class="text-white mt-2">
+    <p class="text-xl">Nome: <span class="text-blue-500"><%= @issuer.nome %></span></p>
+    <p class="text-xl">CNPJ: <span class="text-blue-500"><%= @issuer.cnpj %></span></p>
+    <p class="text-xl">Nome Fantasia: <span class="text-blue-500"><%= @issuer.nome_fantasia %></span></p>
+    <p class="text-xl">Endereço: <span class="text-blue-500"><%= [@issuer.logradouro, @issuer.numero, @issuer.bairro, @issuer.municipio, @issuer.uf].compact.join(', ') %></span></p>
+    <p class="text-xl">Telefone: <span class="text-blue-500"><%= @issuer.telefone %></span></p>
+  </div>
+
+  <h2 class="text-white text-2xl font-bold mt-5 uppercase">Destinatário</h2>
+  <div class="text-white mt-2">
+    <p class="text-xl">Nome: <span class="text-blue-500"><%= @recipient.nome %></span></p>
+    <p class="text-xl">CNPJ: <span class="text-blue-500"><%= @recipient.cnpj %></span></p>
+    <p class="text-xl">Endereço: <span class="text-blue-500"><%= [@recipient.logradouro, @recipient.numero, @recipient.bairro, @recipient.municipio, @recipient.uf].compact.join(', ') %></span></p>
+  </div>
+
+ <h2 class="text-white text-2xl font-bold mt-5 uppercase">Produtos</h2>
+<div class="flex gap-5 flex-wrap">
+<% @nfce.nfce_products.each do |product|%>
+<div>
+<h3 class="text-xl mt-5 font-bold max-w-lg text-blue-500"><%=product.product.nome%></h3>
+<ul class="space-y-2 py-2 text-white">
+<li class="text-xl">Valor unitário: <span class="text-blue-500"><%=product.valor_unitario%></span> </li>
+<li class="text-xl">Unidade comercializada: <span class="text-blue-500"><%=product.unidade_comercializada%></span> </li>
+<li class="text-xl">Quantidade comercializada: <span class="text-blue-500"><%=product.quantidade_comercializada%></span> </li>
+<li class="text-xl">Valor icms: <span class="text-blue-500"><%=product.valor_icms%></span> </li>
+<li class="text-xl">Valor Total:<span class="text-blue-500"> <%=product.valor_total%></span> </li>
+</ul>
+
+</div>
+<% end%>
+</div>
+<div>
+<h2 class="text-white text-2xl font-bold mt-5 uppercase">Impostos</h2>
+<ul class="space-y-2 text-white py-2">
+<li class="text-xl">Pis:<span class="text-blue-500"> <%=@nfce.tax.valor_total_pis%></span> </li>
+<li class="text-xl">Confins :<span class="text-blue-500"> <%=@nfce.tax.valor_total_cofins%></span> </li>
+<li class="text-xl">Icms: <span class="text-blue-500"><%=@nfce.tax.valor_icms%></span> </li>
+<li class="text-xl">Tributo: <span class="text-blue-500"><%=@nfce.tax.valor_tributo%></span> </li>
+</ul>
+</div>
+<% end %>
+</div>
+
+
