@@ -10,6 +10,7 @@ wb.add_worksheet(name: "Nfce") do |sheet|
           'Total tributo', 
           'Total IPI', 
           'Total icms',
+          'Média dos valores das NFCEs'
         ]
     sheet.add_row [
             @start_date, 
@@ -19,5 +20,6 @@ wb.add_worksheet(name: "Nfce") do |sheet|
             @total_value_tributo, 
             @total_value_api, 
             @total_value_icms, 
+            @average_value,
           ]
 end
