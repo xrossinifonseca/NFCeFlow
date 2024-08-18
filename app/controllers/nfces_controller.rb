@@ -79,7 +79,7 @@ class NfcesController < ApplicationController
     @total_nfces = current_customer.nfces.count
     @average_value = average_amount
     @distribution_by_value = distribution_by_value
-    # @highest_total_period = highest_total_period
+    @highest_total_period = highest_total_period
 
 
   end
@@ -111,11 +111,14 @@ class NfcesController < ApplicationController
   end
 
 
-  # def highest_total_period
-  #   period = current_customer.nfces.group_by_month(:data_emissao).sum(:valor_total)
-  #   max_period = period.max_by { |_, total| total }
-  #   { period: max_period.first, total: number_to_currency(max_period.last, unit: "R$", separator: ",", delimiter: ".") }
-  # end
+  def highest_total_period
+    period = current_customer.nfces.group_by_month(:data_emissao).sum(:valor_total)
+    if period.count > 0
+      max_period = period.max_by { |_, total| total }
+    { period: max_period.first, total: number_to_currency(max_period.last, unit: "R$", separator: ",", delimiter: ".") }
+    end
+
+  end
 
 
   def filter_params
