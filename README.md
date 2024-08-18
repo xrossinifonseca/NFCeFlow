@@ -32,7 +32,7 @@ Este projeto é um sistema que permite o upload de arquivos XML e ZIP contendo n
 - Ruby 3.x.x
 - Rails 7.x.x
 - Redis (necessário para o Sidekiq)
-- PostgreSQL ou outro banco de dados configurado
+- PostgreSQL
 
 ### Instalação
 
