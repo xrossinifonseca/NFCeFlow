@@ -70,6 +70,12 @@
 </ul>
 </div>
 <% end %>
+
+<div class="flex justify-center">
+<%= button_to "Remover NFCe", nfce_path(@nfce), method: :delete, class: "text-lg text-white bg-red-600 p-2 rounded-md active:scale-105 shadow-xl", data: { confirm: 'Você tem certeza que deseja remover esta NFCe?' } %>
+
+  <%# <button class="p-2 bg-red-600 p-2">Remover NFCE</button> %>
+</div>
 </div>
 
 

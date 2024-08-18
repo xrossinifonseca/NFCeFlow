@@ -5,10 +5,10 @@ class NfcesController < ApplicationController
 
 
   before_action :set_variables, only: [:index,:export_report]
+  before_action :set_nfce, only: [:show,:destroy]
 
 
   def index
-
     search_filter = params[:search_filter]
     if search_filter.present?
     @nfces = search(search_filter)
@@ -27,13 +27,6 @@ class NfcesController < ApplicationController
 
 
   def show
-    @nfce = current_customer.nfces.find_by(id:params[:id])
-
-    if @nfce.nil?
-      render template: 'errors/not_found', status: :not_found
-      return
-    end
-
       @issuer = @nfce.issuer
       @recipient = @nfce.recipient
 
@@ -44,6 +37,19 @@ class NfcesController < ApplicationController
       end
   end
   end
+
+  def destroy
+    if @nfce.customer.id == current_customer.id
+
+      @nfce.destroy
+      flash[:removed_nfce] = "NFCE deleted successfully"
+      redirect_to root_path
+    end
+
+  end
+
+
+
 
 
   def export_report
@@ -115,4 +121,15 @@ class NfcesController < ApplicationController
   def filter_params
     params.permit(:start_date, :end_date,:search_filter)
   end
+
+
+  def set_nfce
+    @nfce = current_customer.nfces.find_by(id:params[:id])
+    if @nfce.nil?
+      render template: 'errors/not_found', status: :not_found
+      return
+    end
+  end
+
+
  end
