@@ -28,27 +28,38 @@
   <div class="flex max-md:flex-col gap-5 md:justify-between">
   <div class="mt-5 space-y-2 ">
     <% if @start_date == Date.today.beginning_of_month && @end_date == Date.today.end_of_month.end_of_day %>
-    <h1 class="text-white text-xl">Totais mês atual</h1>
+    <h1 class="text-blue-500 font-medium text-2xl">Totais mês atual</h1>
   <% else %>
-  <h1 class="text-white text-xl">Total periodo de <%= @start_date.to_date %> a <%= @end_date.to_date %> </h1>
+  <h1 class="text-white text-xl">Total do periodo de <%= @start_date.to_date.strftime("%d/%m/%Y") %> a <%= @end_date.to_date.strftime("%d/%m/%Y") %> </h1>
   <% end %>
     <h2 class="text-white text-xl">Nota: <span class="font-bold"><%= @total %></span></h2>
     <h2 class="text-white text-xl">Tributo: <span class="font-bold"><%= @total_value_tributo %></span></h2>
     <h2 class="text-white text-xl"> IPI: <span class="font-bold"><%= @total_value_api %></span></h2>
     <h2 class="text-white text-xl"> ICMS: <span class="font-bold"><%= @total_value_icms %></span></h2>
+    <h2 class="text-white text-xl">
+    Média dos valores das NFCEs: <span class="font-bold"><%= @average_value %></span>
+  </h2>
   </div>
 
+
 <div class="mt-10">
-  <h1 class="text-white text-xl font-bold">NFC-e processadas: <%=@nfces_by_period.count%></h1>
+  <h1 class="text-white text-xl font-bold">NFCEs processadas: <%=@nfces_by_period.count%></h1>
 </div>
 </div>
 
 
-<div class="mt-10 space-y-5">
+<div class="mt-10 space-y-5 border-t-2 pt-5">
+
+ <div>
+    <h2 class="text-white text-xl">
+    Totais de NFCEs processadas no sistema: <span class="font-bold"><%= @total_nfces %></span>
+  </h2>
+  
+</div>
+
 
 <div class="flex flex-wrap gap-5 items-center max-md:justify-center justify-between ">
-
-<h1 class="text-white text-xl font-bold">Todas NFC-es processadas</h1>
+<h1 class="text-white text-xl font-bold">Todas as NFCEs processadas</h1>
 
   
  <div class="flex items-center gap-2">
@@ -84,7 +95,7 @@
  
  <div class="max-lg:flex justify-center">
   <div class="text-white bg-green-600  text-sm w-fit p-2">
-  <%= link_to 'Exportar todas NFC-e ', nfces_path(format: :xlsx), target: :_blank, class: "underline" %>
+  <%= link_to 'Exportar todas NFCEs ', nfces_path(format: :xlsx), target: :_blank, class: "underline" %>
   </div>
  </div>
 
