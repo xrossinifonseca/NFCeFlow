@@ -70,6 +70,12 @@ class NfcesController < ApplicationController
     @total_value_tributo = total_value_tax(:valor_tributo)
     @total_value_api = total_value_tax(:valor_total_ipi)
     @total_value_icms = total_value_tax(:valor_icms)
+    @total_nfces = current_customer.nfces.count
+    @average_value = average_amount
+    @distribution_by_value = distribution_by_value
+    # @highest_total_period = highest_total_period
+
+
   end
 
 
@@ -87,6 +93,24 @@ class NfcesController < ApplicationController
     total_amount = @nfces_by_period.joins(:tax).sum(column)
     number_to_currency(total_amount, unit: "R$", separator: ",", delimiter: ".")
   end
+
+  def average_amount
+    return "N/A" if @nfces_by_period.empty?
+    average_amount = @nfces_by_period.average(:valor_total).to_f
+    number_to_currency(average_amount, unit: "R$", separator: ",", delimiter: ".")
+  end
+
+  def distribution_by_value
+    @nfces_by_period.group_by { |nfce| (nfce.valor_total / 1000).to_i * 1000 }.transform_values(&:count)
+  end
+
+
+  # def highest_total_period
+  #   period = current_customer.nfces.group_by_month(:data_emissao).sum(:valor_total)
+  #   max_period = period.max_by { |_, total| total }
+  #   { period: max_period.first, total: number_to_currency(max_period.last, unit: "R$", separator: ",", delimiter: ".") }
+  # end
+
 
   def filter_params
     params.permit(:start_date, :end_date,:search_filter)
