@@ -87,9 +87,7 @@ Execute os testes para garantir que tudo esteja funcionando corretamente:
 rspec
 ```
 ## Desafio
-O maior desafio neste projeto foi processar as notas fiscais a partir de arquivos ZIP. Inicialmente, considerei estruturar a lógica armazenando os arquivos extraídos temporariamente em uma pasta dentro do projeto. No entanto, essa abordagem mostrou-se inadequada para o ambiente de produção, onde o armazenamento de arquivos temporários poderia causar problemas de performance e segurança.
-
-Para superar esse obstáculo, decidi modificar a estratégia, mantendo os arquivos em memória até que o Sidekiq processasse cada arquivo individualmente. Após a extração completa do conteúdo do arquivo ZIP, o processamento foi realizado de forma eficiente, sem a necessidade de armazenamento intermediário no sistema de arquivos, o que garantiu uma solução mais segura e escalável.
+O maior desafio neste projeto foi processar as notas fiscais a partir de arquivos ZIP. Inicialmente, considerei armazenar temporariamente os arquivos extraídos em uma pasta dentro do projeto. No entanto, essa abordagem revelou-se inadequada para o ambiente de produção, onde o acesso aos arquivos no ambiente da web não era possível. Além disso, o Sidekiq opera em um serviço separado, não conseguia localizar o caminho dos arquivos extraídos. Para resolver o problema, decidi modificar a estratégia, mantendo os arquivos em memória até que o Sidekiq processasse cada arquivo individualmente. Após a extração completa do conteúdo do arquivo ZIP, o processamento foi realizado de forma eficiente, sem a necessidade de armazenamento intermediário no sistema de arquivos, o que garantiu uma solução mais segura e escalável.
 
 ## Modelagem do Banco de Dados
 
