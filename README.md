@@ -3,6 +3,11 @@
 
 Este projeto é um sistema que permite o upload de arquivos XML e ZIP contendo notas fiscais. O sistema processa esses arquivos em segundo plano usando Sidekiq e gera relatórios detalhados das notas processadas. O sistema foi construído com Ruby on Rails, Nokogiri para parsear os XMLs, Devise para autenticação, e TailwindCSS para o frontend.
 
+
+![screencapture-localhost-3000-2024-08-18-19_47_34](https://github.com/user-attachments/assets/f531b977-7c81-4849-bfd9-23724cdc2fd0)
+
+  
+
 ## Funcionalidades
 
 - **Autenticação de Usuários**: Sistema de login e registro de usuários utilizando Devise.
@@ -37,7 +42,6 @@ Este projeto é um sistema que permite o upload de arquivos XML e ZIP contendo n
 ## Como Utilizar
 
 ### Pré-requisitos
-
 - Ruby 3.x.x
 - Rails 7.x.x
 - Redis (necessário para o Sidekiq)
