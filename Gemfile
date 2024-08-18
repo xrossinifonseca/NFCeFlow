@@ -8,6 +8,8 @@ gem 'caxlsx_rails'
 
 gem 'devise'
 
+gem 'groupdate'
+
 gem "importmap-rails"
 
 gem "jbuilder"

@@ -124,6 +124,8 @@ GEM
       railties (>= 5.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    groupdate (6.4.0)
+      activesupport (>= 6.1)
     htmlentities (4.3.4)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
@@ -326,6 +328,7 @@ DEPENDENCIES
   debug
   devise
   factory_bot_rails (~> 6.4, >= 6.4.3)
+  groupdate
   importmap-rails
   jbuilder
   mimemagic
