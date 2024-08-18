@@ -91,7 +91,7 @@ O maior desafio neste projeto foi processar as notas fiscais a partir de arquivo
 
 ## Modelagem do Banco de Dados
 
-A estrutura do banco de dados foi cuidadosamente projetada para suportar as funcionalidades principais do sistema, como o armazenamento de notas fiscais, a relação entre clientes, emissores, destinatários, e os detalhes fiscais de cada nota. A modelagem foi realizada com o objetivo de otimizar consultas e garantir a integridade dos dados.
+A estrutura do banco de dados foi projetada para suportar as funcionalidades principais do sistema, como o armazenamento de notas fiscais, a relação entre clientes, emissores, destinatários, e os detalhes fiscais de cada nota. A modelagem foi realizada com o objetivo de otimizar consultas e garantir a integridade dos dados.
 
 ### Estrutura das Tabelas
 
