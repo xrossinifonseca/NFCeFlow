@@ -9,6 +9,15 @@ Este projeto é um sistema que permite o upload de arquivos XML e ZIP contendo n
 - **Upload de Arquivos**: Suporte para upload de arquivos XML e ZIP contendo NFCes.
 - **Processamento em Segundo Plano**: As notas fiscais são processadas em background utilizando Sidekiq, garantindo uma experiência fluida para o usuário.
 - **Geração de Relatórios**: Após o processamento, o sistema gera relatórios detalhados das notas fiscais, incluindo:
+  - Totais por período selecionado
+    - Nota
+    - Tributo
+    - IPI
+    - ICMS
+    - Média dos valores das NFCEs
+  - Maior período do valor total
+    - Período
+    - valor
   - Filtro por período das notas.
   - Busca de notas por número.
   - Busca de notas por destinatário através do CNPJ.
