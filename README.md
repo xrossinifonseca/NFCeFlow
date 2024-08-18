@@ -117,8 +117,8 @@ A estrutura do banco de dados foi projetada para suportar as funcionalidades pri
   - https://www.youtube.com/watch?v=c56UxDfeMC0&list=LL&index=3)](https://www.youtube.com/watch?v=c56UxDfeMC0&list=LL&index=3)
   - **Ruby on Rails — Exporting Data to Excel**
   - https://medium.com/@JasonCodes/ruby-on-rails-exporting-data-to-excel-b3b204281085
-  - **Unzip Gem**
-  - https://dev.to/masroorhussainv/unzip-an-archive-and-attach-images-to-active-record-model-objects-505f
+  - **Doc rubyzip gem**
+  - https://github.com/rubyzip/rubyzip
 
 
 
