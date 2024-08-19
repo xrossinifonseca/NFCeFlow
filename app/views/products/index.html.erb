@@ -1,0 +1,87 @@
+<div class="w-full mt-20">
+ 
+<h1 class="text-white text-2xl font-bold text-center">Buscar notas por produtos</h1>
+  
+ <div class="flex items-center gap-2">
+  <form action="<%= products_path %>" method="get">   
+    <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+        </div>
+        <input type="search" id="search_filter" placeholder="produto"  name="search_filter" value="<%= params[:search_filter] %>"  class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required />
+        <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+    </div>
+ </form>
+
+
+   <div>
+     <% if params[:search_filter].present? %>
+    <form action="<%= products_path %>" method="get" >
+      <button type="submit" name="search_filter" value="" class="text-blue-500 hover:underline">Clear</button>
+    </form>
+  <% end %>
+  </div>
+ </div>
+
+ <% if params[:search_filter].present? && @nfces.count == 0 %>
+
+ <div class="mt-5 text-red-500 text-xl font-medium">
+  Produto não encontrado
+ </div>
+<% end %>
+
+
+ <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                    produto
+                </th>
+                <th scope="col" class="px-6 py-3">
+                NCM
+                </th>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                CFOP
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Número nota associada
+                </th>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr class="border-b border-gray-200 dark:border-gray-700">
+        <% @nfces.each do |nfce| %>
+       <% nfce.products.each do |product| %>
+        <tr class="border-b border-gray-200 dark:border-gray-700">
+          <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+            <%= product.nome %>
+          </td>
+          <td class="px-6 py-4 ">
+            <%= product.ncm %>
+          </td>
+          <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+            <%= product.cfop %> 
+          </td>
+          <td class="px-6 py-4">
+            <%= nfce.numero_nota %>
+          </td>
+          <td class="px-6 py-4 w-40 bg-gray-50 dark:bg-gray-800">
+            <%= link_to "Ver", nfce_path(nfce), class: "text-lg text-white hover:text-blue-500 bg-blue-500 p-2 rounded-md active:scale-105 shadow-xl" %>
+          </td>
+        </tr>
+      <% end %>
+     <% end %>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+</div>
